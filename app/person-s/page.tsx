@@ -7,18 +7,20 @@ const PeoplePage = async () => {
   // Ensure this is set in your .env (not .env.local since it's a server component)
   //since this will be deployed on AWS Amplify, we need to set the environment variables in the AWS Amplify console
   const apiURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/person";
-  const bearerToken = process.env.NEXT_API_BEARER_TOKEN || "dummy"; // Ensure this is set in your .env (not .env.local since it's a server component)
+  const bearerToken = process.env.NEXT_PUBLIC_API_BEARER_TOKEN || "dummy"; // Ensure this is set in your .env (not .env.local since it's a server component)
 
   // Fetch people data
   const response = await fetch(apiURL, {
     method: 'GET',
     cache: 'no-cache',
     headers: {
-      'Authorization': `Bearer ${bearerToken}`,
+      //'Authorization': `Bearer ${bearerToken}`,
+      'x-api-key': bearerToken,
       'Content-Type': 'application/json',
     },
   });
-
+  console.log(response.status);
+  console.log(apiURL, bearerToken);
   if (!response.ok) {
     console.error('Failed to fetch people');
     return <div>Failed to load data.</div>;

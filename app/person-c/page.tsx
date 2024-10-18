@@ -15,7 +15,8 @@ const PeoplePage = () => {
       const response = await fetch(apiURL, {
         method: 'GET',
         headers: new Headers({
-          'Authorization': `Bearer ${bearerToken}`,
+          //'Authorization': `Bearer ${bearerToken}`,
+          'x-api-key': bearerToken,
           'Content-Type': 'application/json'
         }),
       });
